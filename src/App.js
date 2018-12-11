@@ -4,6 +4,8 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
+// Example account URL: http://localhost:3000/HjupDnysu
+
 const Account = ({ match }) => {
   return (
     <div>
@@ -15,11 +17,14 @@ const Account = ({ match }) => {
 class App extends Component {
   constructor (props) {
     super(props);
-    this.state = { peeps: [] };
+    this.state = {
+      peeps: [],
+    };
   }
 
   componentDidMount () {
-    axios.get('https://floating-thicket-27491.herokuapp.com/accounts/HjupDnysu')
+    const accountId = window.location.pathname.split('/')[1];
+    axios.get(`https://floating-thicket-27491.herokuapp.com/accounts/${accountId}`)
       .then(response => {
         this.setState({
           peeps: response.data.peeps,
