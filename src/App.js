@@ -22,8 +22,6 @@ class App extends Component {
         this.setState({
           accountFound: true,
           peeps: response.data.peeps,
-        }, () => {
-          console.log(JSON.stringify(this.state.peeps, null, 2));
         });
       }).catch(error => {
         console.error(error);
