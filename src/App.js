@@ -56,7 +56,14 @@ class App extends Component {
           <h1>Peeps</h1>
           <button onClick={() => this.createPeep()}>Create peep</button>
           <ul>
-            {this.state.peeps.map(peep => <li key={peep.peepId}>{peep.peepId}</li>)}
+            {this.state.peeps.map(peep =>
+              <li key={peep.peepId}>
+              Name:
+                <ul>
+                  <li key={`${peep.peepId}:peepId`}>Peep ID: {peep.peepId}</li>
+                </ul>
+              </li>
+            )}
           </ul>
         </Fragment>
       )
