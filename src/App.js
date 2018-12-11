@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 
 // Example account URL: http://localhost:3000/HjupDnysu
@@ -28,18 +28,30 @@ class App extends Component {
       });
   }
 
+  createAccount () {
+    axios.post('https://floating-thicket-27491.herokuapp.com/accounts')
+      .then(response => {
+        const { accountId } = response.data;
+        window.location.pathname = `/${accountId}`;
+      })
+  }
+
   render() {
     if (this.state.accountFound) {
       return (
-        <React.Fragment>
+        <Fragment>
           <h1>Peeps</h1>
           <ul>
             {this.state.peeps.map(peep => <li key={peep.peepId}>{peep.peepId}</li>)}
           </ul>
-        </React.Fragment>
+        </Fragment>
       )
     }
-    return "Account not found."
+    return (
+      <Fragment>
+        <button onClick={ () => this.createAccount() }>Create account</button>
+      </Fragment>
+    )
   }
 }
 
