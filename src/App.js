@@ -16,6 +16,9 @@ class App extends Component {
       peeps: [],
       accountFound: false,
     };
+    this.createAccount = this.createAccount.bind(this);
+    this.createPeep = this.createPeep.bind(this);
+    this.createItem = this.createItem.bind(this);
   }
 
   componentDidMount () {
@@ -49,18 +52,26 @@ class App extends Component {
       });
   }
 
+  createItem () {
+    alert('hi')
+  }
+
   render() {
     if (this.state.accountFound) {
       return (
         <Fragment>
           <h1>Peeps</h1>
-          <button onClick={() => this.createPeep()}>Create peep</button>
+          <button onClick={this.createPeep}>Create peep</button>
           <ul>
             {this.state.peeps.map(peep =>
               <li key={peep.peepId}>
-              Name:
+                Name: <input type="text" />
                 <ul>
-                  <li key={`${peep.peepId}:peepId`}>Peep ID: {peep.peepId}</li>
+                  <li key={`${peep.peepId}:peepId`}>
+                    Peep ID: {peep.peepId}
+                  </li>
+                  <li><button onClick={this.createItem}>Create item</button></li>
+                  {peep.items.map(item => <li key={item}>${item}</li>)}
                 </ul>
               </li>
             )}
@@ -70,7 +81,7 @@ class App extends Component {
     }
     return (
       <Fragment>
-        <button onClick={() => this.createAccount() }>Create account</button>
+        <button onClick={this.createAccount}>Create account</button>
       </Fragment>
     )
   }
