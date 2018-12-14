@@ -7,7 +7,8 @@ import {setAccountId} from './actions';
 class Peeps extends Component {
   constructor (props) {
     super(props);
-    this.props.setAccountId(this.props.match.params.accountId);
+    const accountIdFromReactRouter = this.props.match.params.accountId;
+    this.props.setAccountId(accountIdFromReactRouter);
   }
 
   render () {
