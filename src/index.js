@@ -8,6 +8,7 @@ import reducers from './reducers';
 
 import './index.css';
 import App from './App';
+import Peeps from './Peeps';
 import * as serviceWorker from './serviceWorker';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -19,7 +20,7 @@ ReactDOM.render(
     <Router>
       <Fragment>
         <Route path='/' exact component={App} />
-        <Route path='/:accountId' component={() => "account"} />
+        <Route path='/:accountId' component={Peeps} />
       </Fragment>
     </Router>
   </Provider>,
