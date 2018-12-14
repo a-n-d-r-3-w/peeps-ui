@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import reducers from './reducers';
 
 import './index.css';
@@ -15,7 +16,12 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Fragment>
+        <Route path='/' exact component={App} />
+        <Route path='/:accountId' component={() => "account"} />
+      </Fragment>
+    </Router>
   </Provider>,
   document.getElementById('root'));
 
