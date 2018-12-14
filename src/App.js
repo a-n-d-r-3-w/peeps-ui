@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import './App.css';
 import { createAccount } from './actions';
 
+// TODO: If Redux has accountId, then render Redirect to go to `/${accountId}`.
+
 const App = ({ onClickCreateAccount }) => (
     <button onClick={onClickCreateAccount}>Create account</button>
 );
