@@ -19,7 +19,8 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Fragment>
-        <Route path='/' exact component={App} />
+        <div><a href="/">Home</a></div>
+        <Route exact path='/' component={App} />
         <Route path='/:accountId' component={Peeps} />
       </Fragment>
     </Router>

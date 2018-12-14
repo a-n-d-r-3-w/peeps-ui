@@ -16,7 +16,7 @@ class Peeps extends Component {
   }
 
   render () {
-    return `accountId: ${this.props.accountId}`
+    return "Peeps";
   }
 }
 
