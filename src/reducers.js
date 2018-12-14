@@ -1,14 +1,16 @@
-import {CREATE_ACCOUNT} from './actions';
+import {SET_ACCOUNT_ID} from './actions';
 
 const reducers = (state = {}, action) => {
-  if (action.type === CREATE_ACCOUNT) {
-    const { accountId } = action;
-    return {
-      accountId,
-      ...state
-    };
+  switch (action.type) {
+    case SET_ACCOUNT_ID:
+      const { accountId } = action;
+      return {
+        accountId,
+        ...state
+      };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default reducers;

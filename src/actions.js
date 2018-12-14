@@ -2,7 +2,7 @@ import axios from "axios";
 
 const ACCOUNTS_DB_URL = `https://floating-thicket-27491.herokuapp.com/accounts`;
 
-export const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
+export const SET_ACCOUNT_ID = 'SET_ACCOUNT_ID';
 
 export function createAccount () {
   return function (dispatch, getState) {
@@ -10,7 +10,7 @@ export function createAccount () {
       .then(response => {
         const { accountId } = response.data;
         dispatch({
-          type: CREATE_ACCOUNT,
+          type: SET_ACCOUNT_ID,
           accountId,
         });
       })
@@ -18,4 +18,11 @@ export function createAccount () {
         console.error(error);
       });
   }
+}
+
+export function setAccountId (accountId) {
+  return {
+    type: SET_ACCOUNT_ID,
+    accountId,
+  };
 }
