@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './App.css';
+import { createAccount } from './actions';
 
 const App = ({ onClickCreateAccount }) => (
     <button onClick={onClickCreateAccount}>Create account</button>
@@ -17,7 +18,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onClickCreateAccount: () => dispatch({ type: 'CREATE_ACCOUNT' })
+    onClickCreateAccount: () => dispatch(createAccount())
   };
 };
 
