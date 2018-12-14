@@ -1,4 +1,4 @@
-import {SET_ACCOUNT_ID} from './actions';
+import {SET_ACCOUNT_ID, SET_PEEPS} from './actions';
 
 const reducers = (state = {}, action) => {
   switch (action.type) {
@@ -6,7 +6,13 @@ const reducers = (state = {}, action) => {
       const { accountId } = action;
       return {
         accountId,
-        ...state
+        ...state,
+      };
+    case SET_PEEPS:
+      const { peeps } = action;
+      return {
+        peeps,
+        ...state,
       };
     default:
       return state;
