@@ -23,14 +23,15 @@ class Peeps extends Component {
         <ul>
           {peeps.map((peep, index) =>
             <li key={peep.peepId}>
-              {peep.name}
+              <strong>{peep.name}</strong>
               <ul>
+                <li><button onClick={() => {}}>Add item</button></li>
                 {peep.items.map(item => <li>{item}</li>)}
               </ul>
             </li>
           )}
+          <li><button onClick={onClickCreatePeep}>Create peep</button></li>
         </ul>
-        <button onClick={onClickCreatePeep}>Create peep</button>
       </Fragment>
     );
   }
