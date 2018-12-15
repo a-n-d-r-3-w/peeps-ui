@@ -5,14 +5,14 @@ const reducers = (state = {}, action) => {
     case SET_ACCOUNT_ID:
       const { accountId } = action;
       return {
-        accountId,
         ...state,
+        accountId,
       };
     case SET_PEEPS:
       const { peeps } = action;
       return {
-        peeps,
         ...state,
+        peeps,
       };
     default:
       return state;

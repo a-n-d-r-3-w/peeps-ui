@@ -44,3 +44,16 @@ export function getPeeps () {
       });
   }
 }
+
+export function createPeep () {
+  return function (dispatch, getState) {
+    const { accountId } = getState();
+    axios.post(`${ACCOUNTS_DB_URL}/${accountId}/peeps`)
+      .then(response => {
+        dispatch(getPeeps());
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+}
