@@ -5,25 +5,32 @@ import './App.css';
 import {setAccountId, getPeeps, createPeep} from './actions';
 
 class Peeps extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     const accountIdFromReactRouter = this.props.match.params.accountId;
     this.props.setAccountId(accountIdFromReactRouter);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.getPeeps();
   }
 
-  render () {
-    const { peeps, onClickCreatePeep } = this.props;
+  render() {
+    const {peeps, onClickCreatePeep} = this.props;
     return (
       <Fragment>
         <h1>Peeps</h1>
         <ul>
-          {peeps.map((peep, index) => <li key={index}>{peep.toString()}</li>)}
-          <li><button onClick={onClickCreatePeep}>Create peep</button></li>
+          {peeps.map((peep, index) =>
+            <li key={index}>
+              {peep.peepId}
+              <ul>
+                {peep.items.map(item => <li>{item}</li>)}
+              </ul>
+            </li>
+          )}
         </ul>
+        <button onClick={onClickCreatePeep}>Create peep</button>
       </Fragment>
     );
   }
