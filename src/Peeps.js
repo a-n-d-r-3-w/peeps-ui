@@ -22,8 +22,8 @@ class Peeps extends Component {
         <h1>Peeps</h1>
         <ul>
           {peeps.map((peep, index) =>
-            <li key={index}>
-              {peep.peepId}
+            <li key={peep.peepId}>
+              {peep.name}
               <ul>
                 {peep.items.map(item => <li>{item}</li>)}
               </ul>
