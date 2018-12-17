@@ -21,7 +21,8 @@ ReactDOM.render(
       <Fragment>
         <div><a href="/">Home</a></div>
         <Route exact path='/' component={App} />
-        <Route path='/:accountId' component={Account} />
+        <Route exact path='/:accountId' component={Account} />
+        <Route exact path='/:accountId/:peepId' component={() => "Peep"} />
       </Fragment>
     </Router>
   </Provider>,

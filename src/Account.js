@@ -22,19 +22,10 @@ class Account extends Component {
     const {peeps, onClickCreatePeep} = this.props;
     return (
       <Fragment>
-        <h1>Peeps</h1>
-        <ul>
-          {peeps.map((peep, index) =>
-            <li key={peep.peepId}>
-              <strong>{peep.name}</strong>
-              <ul>
-                <li><button onClick={() => {}}>Add item</button></li>
-                {peep.items.map(item => <li>{item}</li>)}
-              </ul>
-            </li>
-          )}
-          <li><button onClick={onClickCreatePeep}>Create peep</button></li>
-        </ul>
+        {peeps.map(peep =>
+          <div><a href={`/${this.props.accountId}/${peep.peepId}`}>{peep.name}</a></div>
+        )}
+        <button onClick={onClickCreatePeep}>Create peep</button>
       </Fragment>
     );
   }
