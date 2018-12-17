@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import './App.css';
 import {setAccountId, getPeeps, createPeep} from './actions';
 
-class Peeps extends Component {
+class Account extends Component {
   constructor(props) {
     super(props);
     const accountIdFromReactRouter = this.props.match.params.accountId;
@@ -40,7 +40,7 @@ class Peeps extends Component {
   }
 }
 
-Peeps.propTypes = {
+Account.propTypes = {
   accountId: PropTypes.string,
   getPeeps: PropTypes.func.isRequired,
   peeps: PropTypes.array,
@@ -48,7 +48,7 @@ Peeps.propTypes = {
   onClickCreatePeep: PropTypes.func.isRequired,
 };
 
-Peeps.defaultProps = {
+Account.defaultProps = {
   accountId: '',
   peeps: [],
 };
@@ -65,4 +65,4 @@ const mapDispatchToProps = dispatch => ({
   onClickCreatePeep: () => dispatch(createPeep()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Peeps);
+export default connect(mapStateToProps, mapDispatchToProps)(Account);
