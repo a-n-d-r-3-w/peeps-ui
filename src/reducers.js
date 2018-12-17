@@ -1,5 +1,6 @@
 import {
   SET_ACCOUNT_ID,
+  SET_PEEP_ID,
   SET_PEEPS,
   SET_IS_LOADING
 } from './actions';
@@ -11,6 +12,12 @@ const reducers = (state = {}, action) => {
       return {
         ...state,
         accountId,
+      };
+    case SET_PEEP_ID:
+      const { peepId } = action;
+      return {
+        ...state,
+        peepId,
       };
     case SET_PEEPS:
       const { peeps } = action;

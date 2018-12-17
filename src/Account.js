@@ -33,6 +33,7 @@ class Account extends Component {
 
 Account.propTypes = {
   accountId: PropTypes.string,
+  isLoading: PropTypes.bool,
   getPeeps: PropTypes.func.isRequired,
   peeps: PropTypes.array,
   setAccountId: PropTypes.func.isRequired,
@@ -41,6 +42,7 @@ Account.propTypes = {
 
 Account.defaultProps = {
   accountId: '',
+  isLoading: true,
   peeps: [],
 };
 

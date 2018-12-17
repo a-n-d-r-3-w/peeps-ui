@@ -3,6 +3,7 @@ import axios from "axios";
 const ACCOUNTS_DB_URL = `https://floating-thicket-27491.herokuapp.com/accounts`;
 
 export const SET_ACCOUNT_ID = 'SET_ACCOUNT_ID';
+export const SET_PEEP_ID = 'SET_PEEP_ID';
 export const SET_PEEPS = 'SET_PEEPS';
 export const SET_IS_LOADING = 'SET_IS_LOADING';
 
@@ -34,6 +35,13 @@ export function setAccountId (accountId) {
   return {
     type: SET_ACCOUNT_ID,
     accountId,
+  };
+}
+
+export function setPeepId (peepId) {
+  return {
+    type: SET_PEEP_ID,
+    peepId,
   };
 }
 
