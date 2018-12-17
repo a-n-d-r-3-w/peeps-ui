@@ -16,6 +16,9 @@ class Peeps extends Component {
   }
 
   render() {
+    if (this.props.isLoading) {
+      return "Loading...";
+    }
     const {peeps, onClickCreatePeep} = this.props;
     return (
       <Fragment>
@@ -52,6 +55,7 @@ Peeps.defaultProps = {
 
 const mapStateToProps = state => ({
   accountId: state.accountId,
+  isLoading: state.isLoading,
   peeps: state.peeps,
 });
 
