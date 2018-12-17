@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import reducers from './reducers';
+
 import './index.css';
 import App from './App';
+import Peeps from './Peeps';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <Fragment>
+        <div><a href="/">Home</a></div>
+        <Route exact path='/' component={App} />
+        <Route path='/:accountId' component={Peeps} />
+      </Fragment>
+    </Router>
+  </Provider>,
+  document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
