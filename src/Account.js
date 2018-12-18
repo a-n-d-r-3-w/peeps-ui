@@ -19,22 +19,14 @@ class Account extends Component {
     if (this.props.isLoading) {
       return "Loading...";
     }
-    const {peeps, onClickCreatePeep} = this.props;
+    const {peeps, onClickCreatePeep, accountId} = this.props;
     return (
       <Fragment>
-        <h1>Peeps</h1>
-        <ul>
-          {peeps.map((peep, index) =>
-            <li key={peep.peepId}>
-              <strong>{peep.name}</strong>
-              <ul>
-                <li><button onClick={() => {}}>Add item</button></li>
-                {peep.items.map(item => <li>{item}</li>)}
-              </ul>
-            </li>
-          )}
-          <li><button onClick={onClickCreatePeep}>Create peep</button></li>
-        </ul>
+        <div>Account ID: {accountId}</div>
+        {peeps.map(peep =>
+          <div><a href={`/${accountId}/${peep.peepId}`}>{peep.name}</a></div>
+        )}
+        <button onClick={onClickCreatePeep}>Create peep</button>
       </Fragment>
     );
   }
@@ -42,6 +34,7 @@ class Account extends Component {
 
 Account.propTypes = {
   accountId: PropTypes.string,
+  isLoading: PropTypes.bool,
   getPeeps: PropTypes.func.isRequired,
   peeps: PropTypes.array,
   setAccountId: PropTypes.func.isRequired,
@@ -50,6 +43,7 @@ Account.propTypes = {
 
 Account.defaultProps = {
   accountId: '',
+  isLoading: true,
   peeps: [],
 };
 

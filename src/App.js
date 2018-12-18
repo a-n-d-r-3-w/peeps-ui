@@ -5,11 +5,15 @@ import { Redirect } from 'react-router';
 import './App.css';
 import {createAccount} from './actions';
 
-const App = ({ accountId, onClickCreateAccount }) => (
-  !!accountId ?
-    <Redirect to={`/${accountId}`} /> :
-    <button onClick={onClickCreateAccount}>Create account</button>
-);
+const App = ({ accountId, onClickCreateAccount, isLoading }) => {
+  if (!!accountId) {
+    return <Redirect to={`/${accountId}`}/>;
+  }
+  if (isLoading) {
+    return "Loading...";
+  }
+  return <button onClick={onClickCreateAccount}>Create account</button>;
+};
 
 App.propTypes = {
   accountId: PropTypes.string,
@@ -17,13 +21,14 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { accountId: state.accountId };
-};
-
-const mapDispatchToProps = dispatch => {
   return {
-    onClickCreateAccount: () => dispatch(createAccount())
+    accountId: state.accountId,
+    isLoading: state.isLoading
   };
 };
+
+const mapDispatchToProps = dispatch => ({
+  onClickCreateAccount: () => dispatch(createAccount())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
