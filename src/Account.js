@@ -24,7 +24,7 @@ class Account extends Component {
       <Fragment>
         <div>Account ID: {accountId}</div>
         {peeps.map(peep =>
-          <div><a href={`/${accountId}/${peep.peepId}`}>{peep.name}</a></div>
+          <div key={peep.peepId}><a href={`/${accountId}/${peep.peepId}`}>{peep.name}</a></div>
         )}
         <button onClick={onClickCreatePeep}>Create peep</button>
       </Fragment>

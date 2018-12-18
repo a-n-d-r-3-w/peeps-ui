@@ -12,7 +12,6 @@ class Peep extends Component {
     const peepId = paramsFromReactRouter.peepId;
     this.props.setAccountId(accountId);
     this.props.setPeepId(peepId);
-    this.state = { value: 'Example text' };
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
   }
 
@@ -21,7 +20,7 @@ class Peep extends Component {
   }
 
   handleTextAreaChange (event) {
-    this.setState({ value: event.target.value });
+    console.log(event.target.value);
   }
 
   render() {
@@ -34,7 +33,7 @@ class Peep extends Component {
         <div><a href={`/${this.props.accountId}`}>Account</a></div>
         <div>Peep ID: {peepId}</div>
         <div>{peep.name}</div>
-        <textarea onChange={this.handleTextAreaChange} value={this.state.value} />
+        <textarea onChange={this.handleTextAreaChange} value={peep.info} />
       </Fragment>
     );
   }
