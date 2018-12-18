@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import './App.css';
-import {setAccountId, getPeeps, createPeep, setPeepId} from './actions';
+import {setAccountId, createPeep, setPeepId, getPeep} from './actions';
 
 class Peep extends Component {
   constructor(props) {
@@ -15,23 +15,24 @@ class Peep extends Component {
   }
 
   componentDidMount() {
-    // this.props.getPeeps();
+    this.props.getPeep();
   }
 
   render() {
-    return "Peep";
-    // if (this.props.isLoading) {
-    //   return "Loading...";
-    // }
-    // const {peeps, onClickCreatePeep} = this.props;
-    // return (
-    //   <Fragment>
-    //     {peeps.map(peep =>
-    //       <div><a href={`/${this.props.accountId}/${peep.peepId}`}>{peep.name}</a></div>
-    //     )}
-    //     <button onClick={onClickCreatePeep}>Create peep</button>
-    //   </Fragment>
-    // );
+    if (this.props.isLoading) {
+      return "Loading...";
+    }
+    const {peep} = this.props;
+    return (
+      <Fragment>
+        <h1>{peep.name}</h1>
+        <div>
+          <h3>Items</h3>
+          <div><button onClick={()=>{}}>Add item</button></div>
+          {peep.items.map(item => <div>{item}</div>)}
+        </div>
+      </Fragment>
+    );
   }
 }
 
@@ -41,24 +42,27 @@ Peep.propTypes = {
   setAccountId: PropTypes.func.isRequired,
   setPeepId: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
+  peep: PropTypes.object,
 };
 
 Peep.defaultProps = {
   accountId: '',
   isLoading: true,
   peepId: '',
+  peep: {},
 };
 
 const mapStateToProps = state => ({
   accountId: state.accountId,
   peepId: state.peepId,
   isLoading: state.isLoading,
+  peep: state.peep,
 });
 
 const mapDispatchToProps = dispatch => ({
   setAccountId: accountId => dispatch(setAccountId(accountId)),
   setPeepId: accountId => dispatch(setPeepId(accountId)),
-  getPeeps: () => dispatch(getPeeps()),
+  getPeep: () => dispatch(getPeep()),
   onClickCreatePeep: () => dispatch(createPeep()),
 });
 
