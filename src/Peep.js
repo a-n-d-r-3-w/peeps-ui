@@ -25,12 +25,9 @@ class Peep extends Component {
     const {peep} = this.props;
     return (
       <Fragment>
-        <h1>{peep.name}</h1>
-        <div>
-          <h3>Items</h3>
-          <div><button onClick={()=>{}}>Add item</button></div>
-          {peep.items.map(item => <div>{item}</div>)}
-        </div>
+        <div>{peep.name}</div>
+        <div><button onClick={()=>{}}>Add item</button></div>
+        {peep.items.map(item => <div><a href="">{item}</a></div>)}
       </Fragment>
     );
   }
