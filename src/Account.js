@@ -19,11 +19,12 @@ class Account extends Component {
     if (this.props.isLoading) {
       return "Loading...";
     }
-    const {peeps, onClickCreatePeep} = this.props;
+    const {peeps, onClickCreatePeep, accountId} = this.props;
     return (
       <Fragment>
+        <div>Account ID: {accountId}</div>
         {peeps.map(peep =>
-          <div><a href={`/${this.props.accountId}/${peep.peepId}`}>{peep.name}</a></div>
+          <div><a href={`/${accountId}/${peep.peepId}`}>{peep.name}</a></div>
         )}
         <button onClick={onClickCreatePeep}>Create peep</button>
       </Fragment>

@@ -22,9 +22,11 @@ class Peep extends Component {
     if (this.props.isLoading) {
       return "Loading...";
     }
-    const {peep} = this.props;
+    const {peep, peepId} = this.props;
     return (
       <Fragment>
+        <div><a href={`/${this.props.accountId}`}>Account</a></div>
+        <div>Peep ID: {peepId}</div>
         <div>{peep.name}</div>
         <div><button onClick={()=>{}}>Add item</button></div>
         {peep.items.map(item => <div><a href="">{item}</a></div>)}
