@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import './App.css';
 import {setAccountId, getPeeps, createPeep} from './actions';
 
@@ -23,7 +24,7 @@ class Account extends Component {
     return (
       <Fragment>
         {peeps.map(peep =>
-          <div><a href={`/${this.props.accountId}/${peep.peepId}`}>{peep.name}</a></div>
+          <div><Link to={`/${this.props.accountId}/${peep.peepId}`}>{peep.name}</Link></div>
         )}
         <button onClick={onClickCreatePeep}>Create peep</button>
       </Fragment>
