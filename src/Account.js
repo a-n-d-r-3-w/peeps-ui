@@ -23,9 +23,17 @@ class Account extends Component {
     return (
       <Fragment>
         <div>Account ID: {accountId}</div>
-        {peeps.map(peep =>
-          <div key={peep.peepId}><a href={`/${accountId}/${peep.peepId}`}>{peep.name}</a></div>
-        )}
+        <div className="list-group">
+          {peeps.map(peep =>
+            <a
+              key={peep.peepId}
+              href={`/${accountId}/${peep.peepId}`}
+              className="list-group-item list-group-item-action"
+            >
+              {peep.name}
+            </a>
+          )}
+        </div>
         <button
           type='button'
           className="btn btn-primary"
