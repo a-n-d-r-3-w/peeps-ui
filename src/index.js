@@ -20,7 +20,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div className='container'>
-        <div><a href="/">Home</a></div>
+        <nav className="nav">
+          <a className="nav-link" href="/">Home</a>
+        </nav>
         <Route exact path='/' component={App} />
         <Route exact path='/:accountId' component={Account} />
         <Route exact path='/:accountId/:peepId' component={Peep} />
