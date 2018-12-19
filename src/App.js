@@ -12,7 +12,14 @@ const App = ({ accountId, onClickCreateAccount, isLoading }) => {
   if (isLoading) {
     return "Loading...";
   }
-  return <button onClick={onClickCreateAccount}>Create account</button>;
+  return (
+    <button
+      type='button'
+      className="btn btn-primary"
+      onClick={onClickCreateAccount}
+    >
+      Create account
+    </button>);
 };
 
 App.propTypes = {

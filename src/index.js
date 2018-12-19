@@ -19,12 +19,12 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Fragment>
+      <div className='container'>
         <div><a href="/">Home</a></div>
         <Route exact path='/' component={App} />
         <Route exact path='/:accountId' component={Account} />
         <Route exact path='/:accountId/:peepId' component={Peep} />
-      </Fragment>
+      </div>
     </Router>
   </Provider>,
   document.getElementById('root'));
