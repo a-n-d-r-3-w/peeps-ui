@@ -54,7 +54,7 @@ class Account extends Component {
         </div>
         <button
           type='button'
-          className="btn btn-primary"
+          className="btn btn-primary mt-3"
           onClick={onClickCreatePeep}
         >
           Create peep
