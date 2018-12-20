@@ -20,8 +20,12 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div className='container'>
-        <nav className="nav">
-          <a className="nav-link" href="/">Home</a>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item" aria-current="page">
+              <a className="nav-link" href="/">Home</a>
+            </li>
+          </ol>
         </nav>
         <Route exact path='/' component={App} />
         <Route exact path='/:accountId' component={Account} />

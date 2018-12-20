@@ -22,7 +22,16 @@ class Account extends Component {
     const {peeps, onClickCreatePeep, accountId} = this.props;
     return (
       <Fragment>
-        <div>Account ID: {accountId}</div>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="/">Home</a>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              Account {accountId}
+            </li>
+          </ol>
+        </nav>
         <div className="list-group">
           {peeps.map(peep =>
             <a
