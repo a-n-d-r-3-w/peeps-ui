@@ -53,7 +53,16 @@ class Peep extends Component {
     return (
       <Fragment>
         {nav}
-        <textarea onChange={this.handleTextAreaChange} value={peep.info} />
+        <form>
+          <div className='form-group'>
+            <textarea
+              className="form-control"
+              rows="10"
+              onChange={this.handleTextAreaChange}
+              value={peep.info}
+            />
+          </div>
+        </form>
       </Fragment>
     );
   }
