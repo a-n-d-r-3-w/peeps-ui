@@ -27,12 +27,22 @@ class Peep extends Component {
     if (this.props.isLoading) {
       return "Loading...";
     }
-    const {peep, peepId} = this.props;
+    const {peep, accountId} = this.props;
     return (
       <Fragment>
-        <div><a href={`/${this.props.accountId}`}>Account</a></div>
-        <div>Peep ID: {peepId}</div>
-        <div>{peep.name}</div>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="/">Home</a>
+            </li>
+            <li className="breadcrumb-item">
+              <a href={`/${accountId}`}>Account {accountId}</a>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              {peep.name}
+            </li>
+          </ol>
+        </nav>
         <textarea onChange={this.handleTextAreaChange} value={peep.info} />
       </Fragment>
     );
