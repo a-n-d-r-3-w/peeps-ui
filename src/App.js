@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router';
@@ -6,20 +6,42 @@ import './App.css';
 import {createAccount} from './actions';
 
 const App = ({ accountId, onClickCreateAccount, isLoading }) => {
+  const nav = (
+    <nav aria-label="breadcrumb">
+      <ol className="breadcrumb">
+        <li className="breadcrumb-item active" aria-current="page">
+          Home
+        </li>
+      </ol>
+    </nav>
+  );
   if (!!accountId) {
-    return <Redirect to={`/${accountId}`}/>;
+    return (
+      <Fragment>
+        {nav}
+        <Redirect to={`/${accountId}`}/>
+      </Fragment>
+    );
   }
   if (isLoading) {
-    return "Loading...";
+    return (
+      <Fragment>
+        {nav}
+        Loading...
+      </Fragment>
+    );
   }
   return (
-    <button
-      type='button'
-      className="btn btn-primary"
-      onClick={onClickCreateAccount}
-    >
-      Create account
-    </button>);
+    <Fragment>
+      {nav}
+      <button
+        type='button'
+        className="btn btn-primary"
+        onClick={onClickCreateAccount}
+      >
+        Create account
+      </button>
+    </Fragment>);
 };
 
 App.propTypes = {

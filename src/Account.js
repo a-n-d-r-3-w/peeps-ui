@@ -16,22 +16,31 @@ class Account extends Component {
   }
 
   render() {
-    if (this.props.isLoading) {
-      return "Loading...";
-    }
     const {peeps, onClickCreatePeep, accountId} = this.props;
+
+    const nav = (
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <a href="/">Home</a>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            Account {accountId}
+          </li>
+        </ol>
+      </nav>
+    );
+
+    if (this.props.isLoading) {
+      return (<Fragment>
+        {nav}
+        Loading...
+      </Fragment>);
+    }
+
     return (
       <Fragment>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="/">Home</a>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              Account {accountId}
-            </li>
-          </ol>
-        </nav>
+        {nav}
         <div className="list-group">
           {peeps.map(peep =>
             <a

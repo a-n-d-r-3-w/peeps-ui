@@ -24,25 +24,35 @@ class Peep extends Component {
   }
 
   render() {
-    if (this.props.isLoading) {
-      return "Loading...";
+    const {peep, accountId, isLoading} = this.props;
+    const nav = (
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <a href="/">Home</a>
+          </li>
+          <li className="breadcrumb-item">
+            <a href={`/${accountId}`}>Account {accountId}</a>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            {peep.name}
+          </li>
+        </ol>
+      </nav>
+    );
+
+    if (isLoading) {
+      return (
+        <Fragment>
+          {nav}
+          Loading...
+        </Fragment>
+      )
     }
-    const {peep, accountId} = this.props;
+
     return (
       <Fragment>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="/">Home</a>
-            </li>
-            <li className="breadcrumb-item">
-              <a href={`/${accountId}`}>Account {accountId}</a>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              {peep.name}
-            </li>
-          </ol>
-        </nav>
+        {nav}
         <textarea onChange={this.handleTextAreaChange} value={peep.info} />
       </Fragment>
     );

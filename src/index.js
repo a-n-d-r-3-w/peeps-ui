@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -20,13 +20,6 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div className='container'>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item" aria-current="page">
-              <a className="nav-link" href="/">Home</a>
-            </li>
-          </ol>
-        </nav>
         <Route exact path='/' component={App} />
         <Route exact path='/:accountId' component={Account} />
         <Route exact path='/:accountId/:peepId' component={Peep} />
