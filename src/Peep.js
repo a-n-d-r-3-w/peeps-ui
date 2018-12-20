@@ -57,7 +57,7 @@ class Peep extends Component {
           <div className='form-group'>
             <textarea
               className="form-control"
-              rows="10"
+              rows="14"
               onChange={this.handleTextAreaChange}
               value={peep.info}
             />
