@@ -79,7 +79,7 @@ export function createPeep () {
     });
     const { accountId } = getState();
     axios.post(`${ACCOUNTS_DB_URL}/${accountId}/peeps`)
-      .then(response => {
+      .then(() => {
         dispatch({
           type: SET_IS_LOADING,
           isLoading: false,
@@ -117,7 +117,7 @@ export function getPeep () {
   }
 }
 
-export function updatePeep () {
+export function updatePeep (peepInfo) {
   return function (dispatch, getState) {
     const { accountId, peepId } = getState();
     dispatch({
@@ -125,10 +125,8 @@ export function updatePeep () {
       isLoading: true,
     });
     axios.put(`${ACCOUNTS_DB_URL}/${accountId}/peeps/${peepId}`,
-      {
-        info: 'Hello there'
-      })
-      .then(response => {
+      { info: peepInfo })
+      .then(() => {
         dispatch({
           type: SET_IS_LOADING,
           isLoading: false,

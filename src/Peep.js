@@ -28,7 +28,7 @@ class Peep extends Component {
     const peepInfo = this.textarea.current.value;
     this.setState({
       saveTimeoutId: setTimeout(() => {
-        this.props.updatePeep();
+        this.props.updatePeep(peepInfo);
       }, 1000)
     });
   }
@@ -106,7 +106,7 @@ const mapDispatchToProps = dispatch => ({
   setAccountId: accountId => dispatch(setAccountId(accountId)),
   setPeepId: accountId => dispatch(setPeepId(accountId)),
   getPeep: () => dispatch(getPeep()),
-  updatePeep: () => dispatch(updatePeep()),
+  updatePeep: peepInfo => dispatch(updatePeep(peepInfo)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Peep);
