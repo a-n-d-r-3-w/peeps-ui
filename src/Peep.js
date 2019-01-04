@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import './App.css';
-import {setAccountId, createPeep, setPeepId, getPeep} from './actions';
+import {setAccountId, setPeepId, getPeep} from './actions';
 
 class Peep extends Component {
   constructor(props) {
@@ -13,10 +13,8 @@ class Peep extends Component {
     this.props.setAccountId(accountId);
     this.props.setPeepId(peepId);
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
-    this.handleClickEdit = this.handleClickEdit.bind(this);
-    this.handleClickSave = this.handleClickSave.bind(this);
+    this.textarea = React.createRef();
     this.state = {
-      isEditMode: false,
       peepInfo: '',
     };
   }
@@ -25,22 +23,9 @@ class Peep extends Component {
     this.props.getPeep();
   }
 
-  handleTextAreaChange (event) {
-    this.setState({
-      peepInfo: event.target.value,
-    });
-  }
-
-  handleClickEdit () {
-    this.setState({
-      peepInfo: this.props.peep.info,
-      isEditMode: true
-    });
-  }
-
-  handleClickSave () {
-    // Save changes to server.
-    this.setState({ isEditMode: false });
+  handleTextAreaChange () {
+    const peepInfo = this.textarea.current.value;
+    // Save info every 3 seconds.
   }
 
   render() {
@@ -77,27 +62,11 @@ class Peep extends Component {
           <div className='form-group'>
             <textarea
               className="form-control"
-              rows="10"
+              rows="14"
               onChange={this.handleTextAreaChange}
-              value={this.state.isEditMode ? this.state.peepInfo : peep.info}
-              disabled={!this.state.isEditMode}
+              defaultValue={peep.info}
+              ref={this.textarea}
             />
-          </div>
-          <div className='form-group'>
-            <button
-              className="form-control"
-              onClick={this.handleClickEdit}
-              disabled={this.state.isEditMode}
-              type="button"
-            >Edit</button>
-          </div>
-          <div className='form-group'>
-            <button
-              className="form-control"
-              onClick={this.handleClickSave}
-              type="button"
-              disabled={!this.state.isEditMode}
-            >Save</button>
           </div>
         </form>
       </Fragment>
@@ -132,7 +101,6 @@ const mapDispatchToProps = dispatch => ({
   setAccountId: accountId => dispatch(setAccountId(accountId)),
   setPeepId: accountId => dispatch(setPeepId(accountId)),
   getPeep: () => dispatch(getPeep()),
-  onClickCreatePeep: () => dispatch(createPeep()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Peep);
