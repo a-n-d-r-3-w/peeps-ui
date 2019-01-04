@@ -14,9 +14,6 @@ class Peep extends Component {
     this.props.setPeepId(peepId);
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
     this.textarea = React.createRef();
-    this.state = {
-      peepInfo: '',
-    };
   }
 
   componentDidMount() {
