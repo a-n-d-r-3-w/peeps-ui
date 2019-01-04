@@ -14,6 +14,7 @@ class Peep extends Component {
     this.props.setPeepId(peepId);
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
     this.textarea = React.createRef();
+    this.state = { saveTimeoutId: null };
   }
 
   componentDidMount() {
@@ -21,8 +22,15 @@ class Peep extends Component {
   }
 
   handleTextAreaChange () {
+    if (this.state.saveTimeoutId) {
+      clearTimeout(this.state.saveTimeoutId);
+    }
     const peepInfo = this.textarea.current.value;
-    // Save info every 3 seconds.
+    this.setState({
+      saveTimeoutId: setTimeout(() => {
+        console.log("Save: peepInfo: " + peepInfo);
+      }, 1000)
+    });
   }
 
   render() {
