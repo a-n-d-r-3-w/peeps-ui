@@ -13,6 +13,12 @@ class Peep extends Component {
     this.props.setAccountId(accountId);
     this.props.setPeepId(peepId);
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+    this.handleClickEdit = this.handleClickEdit.bind(this);
+    this.handleClickSave = this.handleClickSave.bind(this);
+    this.state = {
+      isEditMode: false,
+      peepInfo: '',
+    };
   }
 
   componentDidMount() {
@@ -20,7 +26,21 @@ class Peep extends Component {
   }
 
   handleTextAreaChange (event) {
-    console.log(event.target.value);
+    this.setState({
+      peepInfo: event.target.value,
+    });
+  }
+
+  handleClickEdit () {
+    this.setState({
+      peepInfo: this.props.peep.info,
+      isEditMode: true
+    });
+  }
+
+  handleClickSave () {
+    // Save changes to server.
+    this.setState({ isEditMode: false });
   }
 
   render() {
@@ -35,7 +55,7 @@ class Peep extends Component {
             <a href={`/${accountId}`}>Account {accountId}</a>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            {peep.name}
+            {isLoading ? 'Loading...' : peep.name}
           </li>
         </ol>
       </nav>
@@ -57,10 +77,27 @@ class Peep extends Component {
           <div className='form-group'>
             <textarea
               className="form-control"
-              rows="14"
+              rows="10"
               onChange={this.handleTextAreaChange}
-              value={peep.info}
+              value={this.state.isEditMode ? this.state.peepInfo : peep.info}
+              disabled={!this.state.isEditMode}
             />
+          </div>
+          <div className='form-group'>
+            <button
+              className="form-control"
+              onClick={this.handleClickEdit}
+              disabled={this.state.isEditMode}
+              type="button"
+            >Edit</button>
+          </div>
+          <div className='form-group'>
+            <button
+              className="form-control"
+              onClick={this.handleClickSave}
+              type="button"
+              disabled={!this.state.isEditMode}
+            >Save</button>
           </div>
         </form>
       </Fragment>
