@@ -116,3 +116,27 @@ export function getPeep () {
       });
   }
 }
+
+export function updatePeep () {
+  return function (dispatch, getState) {
+    const { accountId, peepId } = getState();
+    dispatch({
+      type: SET_IS_LOADING,
+      isLoading: true,
+    });
+    axios.put(`${ACCOUNTS_DB_URL}/${accountId}/peeps/${peepId}`,
+      {
+        info: 'Hello there'
+      })
+      .then(response => {
+        dispatch({
+          type: SET_IS_LOADING,
+          isLoading: false,
+        });
+        dispatch(getPeep());
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+}

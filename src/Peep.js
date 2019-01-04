@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import './App.css';
-import {setAccountId, setPeepId, getPeep} from './actions';
+import {setAccountId, setPeepId, getPeep, updatePeep} from './actions';
 
 class Peep extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Peep extends Component {
     const peepInfo = this.textarea.current.value;
     this.setState({
       saveTimeoutId: setTimeout(() => {
-        console.log("Save: peepInfo: " + peepInfo);
+        this.props.updatePeep();
       }, 1000)
     });
   }
@@ -106,6 +106,7 @@ const mapDispatchToProps = dispatch => ({
   setAccountId: accountId => dispatch(setAccountId(accountId)),
   setPeepId: accountId => dispatch(setPeepId(accountId)),
   getPeep: () => dispatch(getPeep()),
+  updatePeep: () => dispatch(updatePeep()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Peep);
