@@ -90,7 +90,7 @@ Peep.propTypes = {
 
 Peep.defaultProps = {
   accountId: '',
-  isLoading: true,
+  isLoading: false,
   peepId: '',
   peep: {},
 };
