@@ -34,7 +34,7 @@ class Peep extends Component {
   }
 
   render() {
-    const {peep, accountId, isLoading} = this.props;
+    const {peep, accountId, isLoading, isSaving} = this.props;
     const nav = (
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -64,6 +64,16 @@ class Peep extends Component {
       <Fragment>
         {nav}
         <form>
+          <div className='form-group'>
+            {isSaving ?
+              <div className="alert alert-info" role="alert">
+                Saving...
+              </div> :
+              <div className="alert alert-success" role="alert">
+                Saved
+              </div>
+            }
+          </div>
           <div className='form-group'>
             <textarea
               className="form-control"
@@ -99,6 +109,7 @@ const mapStateToProps = state => ({
   accountId: state.accountId,
   peepId: state.peepId,
   isLoading: state.isLoading,
+  isSaving: state.isSaving,
   peep: state.peep,
 });
 
