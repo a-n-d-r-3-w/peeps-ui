@@ -52,13 +52,22 @@ class Account extends Component {
             </a>
           )}
         </div>
-        <button
-          type='button'
-          className="btn btn-primary mt-3"
-          onClick={onClickCreatePeep}
-        >
-          Create peep
-        </button>
+        <form className="my-3">
+          <div className='form-group mb-2'>
+            <input
+              className='form-control'
+              type="text"
+              placeholder="Name of new peep"
+            />
+          </div>
+          <button
+            type='button'
+            className="btn btn-primary"
+            onClick={onClickCreatePeep}
+          >
+            Create peep
+          </button>
+        </form>
       </Fragment>
     );
   }
