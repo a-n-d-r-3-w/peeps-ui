@@ -67,10 +67,10 @@ class Peep extends Component {
           <div className='form-group'>
             {isSaving ?
               <div className="alert alert-info" role="alert">
-                Saving...
+                Syncing...
               </div> :
               <div className="alert alert-success" role="alert">
-                Saved
+                Synced
               </div>
             }
           </div>
