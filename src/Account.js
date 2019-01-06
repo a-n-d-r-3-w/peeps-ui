@@ -9,14 +9,25 @@ class Account extends Component {
     super(props);
     const accountIdFromReactRouter = this.props.match.params.accountId;
     this.props.setAccountId(accountIdFromReactRouter);
+    this.state = { newPeepName: '' };
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleCreatePeepClick = this.handleCreatePeepClick.bind(this);
+  }
+
+  handleNameChange (event) {
+    this.setState({ newPeepName: event.target.value });
   }
 
   componentDidMount() {
     this.props.getPeeps();
   }
 
+  handleCreatePeepClick () {
+    this.props.onClickCreatePeep(this.state.newPeepName);
+  }
+
   render() {
-    const {peeps, onClickCreatePeep, accountId} = this.props;
+    const {peeps, accountId} = this.props;
 
     const nav = (
       <nav aria-label="breadcrumb">
@@ -58,12 +69,15 @@ class Account extends Component {
               className='form-control'
               type="text"
               placeholder="Name of new peep"
+              value={this.state.newPeepName}
+              onChange={this.handleNameChange}
             />
           </div>
           <button
-            type='button'
+            type='submit'
             className="btn btn-primary"
-            onClick={onClickCreatePeep}
+            onClick={this.handleCreatePeepClick}
+            disabled={this.state.newPeepName.trim().length === 0}
           >
             Create peep
           </button>
@@ -97,7 +111,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setAccountId: accountId => dispatch(setAccountId(accountId)),
   getPeeps: () => dispatch(getPeeps()),
-  onClickCreatePeep: () => dispatch(createPeep()),
+  onClickCreatePeep: name => dispatch(createPeep(name)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

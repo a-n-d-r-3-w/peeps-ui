@@ -72,14 +72,14 @@ export function getPeeps () {
   }
 }
 
-export function createPeep () {
+export function createPeep (name) {
   return function (dispatch, getState) {
     dispatch({
       type: SET_IS_LOADING,
       isLoading: true,
     });
     const { accountId } = getState();
-    axios.post(`${ACCOUNTS_DB_URL}/${accountId}/peeps`)
+    axios.post(`${ACCOUNTS_DB_URL}/${accountId}/peeps`, { name })
       .then(() => {
         dispatch({
           type: SET_IS_LOADING,
