@@ -7,6 +7,7 @@ export const SET_PEEP_ID = 'SET_PEEP_ID';
 export const SET_PEEPS = 'SET_PEEPS';
 export const SET_PEEP = 'SET_PEEP';
 export const SET_IS_LOADING = 'SET_IS_LOADING';
+export const SET_IS_SAVING = 'SET_IS_SAVING';
 
 export function createAccount () {
   return function (dispatch) {
@@ -71,15 +72,15 @@ export function getPeeps () {
   }
 }
 
-export function createPeep () {
+export function createPeep (name) {
   return function (dispatch, getState) {
     dispatch({
       type: SET_IS_LOADING,
       isLoading: true,
     });
     const { accountId } = getState();
-    axios.post(`${ACCOUNTS_DB_URL}/${accountId}/peeps`)
-      .then(response => {
+    axios.post(`${ACCOUNTS_DB_URL}/${accountId}/peeps`, { name })
+      .then(() => {
         dispatch({
           type: SET_IS_LOADING,
           isLoading: false,
@@ -94,11 +95,13 @@ export function createPeep () {
 
 export function getPeep () {
   return function (dispatch, getState) {
-    const { accountId, peepId } = getState();
-    dispatch({
-      type: SET_IS_LOADING,
-      isLoading: true,
-    });
+    const { accountId, peepId, isSaving } = getState();
+    if (!isSaving) {
+      dispatch({
+        type: SET_IS_LOADING,
+        isLoading: true,
+      });
+    }
     axios.get(`${ACCOUNTS_DB_URL}/${accountId}/peeps/${peepId}`)
       .then(response => {
         const peep = response.data;
@@ -106,9 +109,33 @@ export function getPeep () {
           type: SET_PEEP,
           peep,
         });
+        if (!isSaving) {
+          dispatch({
+            type: SET_IS_LOADING,
+            isLoading: false,
+          });
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+}
+
+export function updatePeep (peepInfo) {
+  return function (dispatch, getState) {
+    const { accountId, peepId } = getState();
+    dispatch({
+      type: SET_IS_SAVING,
+      isSaving: true,
+    });
+    axios.put(`${ACCOUNTS_DB_URL}/${accountId}/peeps/${peepId}`,
+      { info: peepInfo })
+      .then(() => {
+        dispatch(getPeep());
         dispatch({
-          type: SET_IS_LOADING,
-          isLoading: false,
+          type: SET_IS_SAVING,
+          isSaving: false,
         });
       })
       .catch(error => {

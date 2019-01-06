@@ -3,7 +3,8 @@ import {
   SET_PEEP_ID,
   SET_PEEPS,
   SET_PEEP,
-  SET_IS_LOADING
+  SET_IS_LOADING,
+  SET_IS_SAVING
 } from './actions';
 
 const reducers = (state = {}, action) => {
@@ -37,6 +38,12 @@ const reducers = (state = {}, action) => {
       return {
         ...state,
         isLoading,
+      };
+    case SET_IS_SAVING:
+      const { isSaving } = action;
+      return {
+        ...state,
+        isSaving,
       };
     default:
       return state;

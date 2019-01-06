@@ -9,24 +9,79 @@ class Account extends Component {
     super(props);
     const accountIdFromReactRouter = this.props.match.params.accountId;
     this.props.setAccountId(accountIdFromReactRouter);
+    this.state = { newPeepName: '' };
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleCreatePeepClick = this.handleCreatePeepClick.bind(this);
+  }
+
+  handleNameChange (event) {
+    this.setState({ newPeepName: event.target.value });
   }
 
   componentDidMount() {
     this.props.getPeeps();
   }
 
+  handleCreatePeepClick () {
+    this.props.onClickCreatePeep(this.state.newPeepName);
+  }
+
   render() {
+    const {peeps, accountId} = this.props;
+
+    const nav = (
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <a href="/">Home</a>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            Account {accountId}
+          </li>
+        </ol>
+      </nav>
+    );
+
     if (this.props.isLoading) {
-      return "Loading...";
+      return (<Fragment>
+        {nav}
+        Loading...
+      </Fragment>);
     }
-    const {peeps, onClickCreatePeep, accountId} = this.props;
+
     return (
       <Fragment>
-        <div>Account ID: {accountId}</div>
-        {peeps.map(peep =>
-          <div><a href={`/${accountId}/${peep.peepId}`}>{peep.name}</a></div>
-        )}
-        <button onClick={onClickCreatePeep}>Create peep</button>
+        {nav}
+        <div className="list-group">
+          {peeps.map(peep =>
+            <a
+              key={peep.peepId}
+              href={`/${accountId}/${peep.peepId}`}
+              className="list-group-item list-group-item-action"
+            >
+              {peep.name}
+            </a>
+          )}
+        </div>
+        <form className="my-3">
+          <div className='form-group mb-2'>
+            <input
+              className='form-control'
+              type="text"
+              placeholder="Name of new peep"
+              value={this.state.newPeepName}
+              onChange={this.handleNameChange}
+            />
+          </div>
+          <button
+            type='submit'
+            className="btn btn-primary"
+            onClick={this.handleCreatePeepClick}
+            disabled={this.state.newPeepName.trim().length === 0}
+          >
+            Create peep
+          </button>
+        </form>
       </Fragment>
     );
   }
@@ -56,7 +111,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setAccountId: accountId => dispatch(setAccountId(accountId)),
   getPeeps: () => dispatch(getPeeps()),
-  onClickCreatePeep: () => dispatch(createPeep()),
+  onClickCreatePeep: name => dispatch(createPeep(name)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);
