@@ -24,6 +24,7 @@ class Account extends Component {
 
   handleCreatePeepClick () {
     this.props.onClickCreatePeep(this.state.newPeepName);
+    this.setState({ newPeepName: '' });
   }
 
   render() {
