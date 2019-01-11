@@ -143,3 +143,16 @@ export function updatePeep (peepInfo) {
       });
   }
 }
+
+export function deletePeep () {
+  return function (dispatch, getState) {
+    const { accountId, peepId } = getState();
+    axios.delete(`${ACCOUNTS_DB_URL}/${accountId}/peeps/${peepId}`)
+      .then(() => {
+        window.location.href = `/${accountId}`
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+}

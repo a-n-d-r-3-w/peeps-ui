@@ -2,7 +2,13 @@ import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import './App.css';
-import {setAccountId, setPeepId, getPeep, updatePeep} from './actions';
+import {
+  setAccountId,
+  setPeepId,
+  getPeep,
+  updatePeep,
+  deletePeep
+} from './actions';
 
 class Peep extends Component {
   constructor(props) {
@@ -83,6 +89,13 @@ class Peep extends Component {
               ref={this.textarea}
             />
           </div>
+          <button
+            type='submit'
+            className="btn btn-danger"
+            onClick={this.props.deletePeep}
+          >
+            Delete
+          </button>
         </form>
       </Fragment>
     );
@@ -118,6 +131,7 @@ const mapDispatchToProps = dispatch => ({
   setPeepId: accountId => dispatch(setPeepId(accountId)),
   getPeep: () => dispatch(getPeep()),
   updatePeep: peepInfo => dispatch(updatePeep(peepInfo)),
+  deletePeep: () => dispatch(deletePeep()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Peep);
