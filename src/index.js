@@ -19,7 +19,7 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <div className='container'>
+      <div className='container mt-3'>
         <Route exact path='/' component={App} />
         <Route exact path='/:accountId' component={Account} />
         <Route exact path='/:accountId/:peepId' component={Peep} />
