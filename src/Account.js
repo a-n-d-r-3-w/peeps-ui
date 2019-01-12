@@ -61,7 +61,7 @@ class Account extends Component {
     return (
       <Fragment>
         {nav}
-        <div className="list-group">
+        <div className="list-group list-group-flush">
           {peeps.map(peep =>
             <span
               key={peep.peepId}
