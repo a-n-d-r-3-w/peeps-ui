@@ -28,9 +28,11 @@ class Account extends Component {
     this.setState({ newPeepName: '' });
   }
 
-  handleDeletePeepClick (peepId) {
+  handleDeletePeepClick (peep) {
     return () => {
-      this.props.deletePeep(peepId);
+      if (window.confirm(`Delete ${peep.name}?`)) {
+        this.props.deletePeep(peep.peepId);
+      }
     };
   }
 
@@ -73,7 +75,7 @@ class Account extends Component {
               </a>
               <button
                 className="btn btn-outline-danger btn-sm ml-3"
-                onClick={this.handleDeletePeepClick(peep.peepId)}
+                onClick={this.handleDeletePeepClick(peep)}
               >Delete</button>
             </span>
           )}
