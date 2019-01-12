@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import './App.css';
-import {setAccountId, getPeeps, createPeep} from './actions';
+import {setAccountId, getPeeps, createPeep, deletePeep} from './actions';
 
 class Account extends Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class Account extends Component {
     this.state = { newPeepName: '' };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCreatePeepClick = this.handleCreatePeepClick.bind(this);
+    this.handleDeletePeepClick = this.handleDeletePeepClick.bind(this);
   }
 
   handleNameChange (event) {
@@ -25,6 +26,12 @@ class Account extends Component {
   handleCreatePeepClick () {
     this.props.onClickCreatePeep(this.state.newPeepName);
     this.setState({ newPeepName: '' });
+  }
+
+  handleDeletePeepClick (peepId) {
+    return () => {
+      this.props.deletePeep(peepId);
+    };
   }
 
   render() {
@@ -55,13 +62,20 @@ class Account extends Component {
         {nav}
         <div className="list-group">
           {peeps.map(peep =>
-            <a
+            <span
               key={peep.peepId}
-              href={`/${accountId}/${peep.peepId}`}
               className="list-group-item list-group-item-action"
             >
-              {peep.name}
-            </a>
+              <a
+                href={`/${accountId}/${peep.peepId}`}
+              >
+                {peep.name}
+              </a>
+              <button
+                className="btn btn-outline-danger btn-sm ml-3"
+                onClick={this.handleDeletePeepClick(peep.peepId)}
+              >Delete</button>
+            </span>
           )}
         </div>
         <form className="my-3">
@@ -113,6 +127,7 @@ const mapDispatchToProps = dispatch => ({
   setAccountId: accountId => dispatch(setAccountId(accountId)),
   getPeeps: () => dispatch(getPeeps()),
   onClickCreatePeep: name => dispatch(createPeep(name)),
+  deletePeep: peepId => dispatch(deletePeep(peepId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);
