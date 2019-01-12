@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router';
-import './App.css';
 import {createAccount} from './actions';
 
 const App = ({ accountId, onClickCreateAccount, isLoading }) => {

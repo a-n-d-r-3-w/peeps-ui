@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import './App.css';
 import {setAccountId, getPeeps, createPeep, deletePeep} from './actions';
 
 class Account extends Component {
