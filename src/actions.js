@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ACCOUNTS_DB_URL = `https://floating-thicket-27491.herokuapp.com/accounts`;
+const ACCOUNTS_DB_URL = `/accounts`;
 
 export const SET_ACCOUNT_ID = 'SET_ACCOUNT_ID';
 export const SET_PEEP_ID = 'SET_PEEP_ID';
